@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useSocket } from "../context/SocketContext";
+import { API_BASE_URL } from "../config";
 
 const Sidebar = ({ selectedUser, onSelectUser }) => {
   const navigate = useNavigate();
@@ -12,7 +13,7 @@ const Sidebar = ({ selectedUser, onSelectUser }) => {
   useEffect(() => {
     const fetchUsers = async () => {
       const token = localStorage.getItem("token");
-      const res = await axios.get("http://localhost:5001/api/auth/users", {
+      const res = await axios.get(`${API_BASE_URL}/api/auth/users`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setUsers(res.data);

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useSocket } from "../context/SocketContext";
+import { API_BASE_URL } from "../config";
 
 const MessageInput = ({ selectedUser, onMessageSent }) => {
   const { socket } = useSocket();
@@ -12,7 +13,7 @@ const MessageInput = ({ selectedUser, onMessageSent }) => {
     if (!text.trim()) return;
 
     const res = await axios.post(
-      `http://localhost:5001/api/messages/send/${selectedUser._id}`,
+      `${API_BASE_URL}/api/messages/send/${selectedUser._id}`,
       { message: text },
       { headers: { Authorization: `Bearer ${token}` } }
     );
@@ -36,7 +37,7 @@ const MessageInput = ({ selectedUser, onMessageSent }) => {
     formData.append("image", file);
 
     const res = await axios.post(
-      `http://localhost:5001/api/messages/send-image/${selectedUser._id}`,
+      `${API_BASE_URL}/api/messages/send-image/${selectedUser._id}`,
       formData,
       { headers: { Authorization: `Bearer ${token}` } }
     );

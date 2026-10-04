@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { useSocket } from "../context/SocketContext";
+import { API_BASE_URL } from "../config";
 
 const ChatBox = ({ selectedUser }) => {
   const { socket } = useSocket();
@@ -17,7 +18,7 @@ const ChatBox = ({ selectedUser }) => {
 
     const fetchMessages = async () => {
       const res = await axios.get(
-        `http://localhost:5001/api/messages/${selectedUser._id}`,
+        `${API_BASE_URL}/api/messages/${selectedUser._id}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       setMessages(res.data);

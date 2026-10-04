@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { io } from "socket.io-client";
+import { API_BASE_URL } from "../config";
 
 const SocketContext = createContext();
 
@@ -11,7 +12,7 @@ export const SocketProvider = ({ children }) => {
     const user = JSON.parse(localStorage.getItem("user"));
     if (!user) return;
 
-    const newSocket = io("http://localhost:5001");
+    const newSocket = io(API_BASE_URL);
     setSocket(newSocket);
 
     // Apna userId server ko do
